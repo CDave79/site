@@ -13,6 +13,7 @@
       --primary: #2563eb; --primary-hover: #1d4ed8; --accent: #2563eb;
       --card-bg: #ffffff; --nav-bg: rgba(255,255,255,.85);
       --hero-grad-a: #eff6ff; --hero-grad-b: #f8fafc;
+      --switch-track: #cbd5e1; --switch-track-on: #2563eb;
     }
     .theme-input:checked ~ .page {
       --bg: #0f172a; --surface: #1e293b; --text: #e2e8f0; --heading: #ffffff;
@@ -20,6 +21,7 @@
       --primary: #2563eb; --primary-hover: #1d4ed8; --accent: #60a5fa;
       --card-bg: #1e293b; --nav-bg: rgba(15,23,42,.85);
       --hero-grad-a: #0b1220; --hero-grad-b: #0f172a;
+      --switch-track: #334155; --switch-track-on: #3b82f6;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -30,17 +32,21 @@
       transition: background-color .5s ease, color .5s ease;
     }
 
-    /* toggle icon (label) */
-    .toggle {
-      width: 38px; height: 38px; border-radius: 999px; cursor: pointer;
-      background: var(--card-bg); border: 1px solid var(--border); font-size: 16px;
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: background-color .3s, border-color .3s; user-select: none;
+    /* Apple-style toggle switch (pure CSS, no JS) */
+    .switch {
+      position: relative; flex: none; width: 48px; height: 28px;
+      border-radius: 999px; background: var(--switch-track); cursor: pointer;
+      transition: background-color .35s ease; -webkit-tap-highlight-color: transparent;
     }
-    .toggle:hover { border-color: var(--accent); }
-    .toggle .sun { display: none; }
-    .theme-input:checked ~ .page .toggle .moon { display: none; }
-    .theme-input:checked ~ .page .toggle .sun { display: inline; }
+    .switch .knob {
+      position: absolute; top: 3px; left: 3px; width: 22px; height: 22px;
+      border-radius: 50%; background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 1px 3px rgba(0,0,0,.12);
+      transition: transform .35s cubic-bezier(.4,.15,.2,1);
+    }
+    .theme-input:checked ~ .page .switch { background: var(--switch-track-on); }
+    .theme-input:checked ~ .page .switch .knob { transform: translateX(20px); }
+    .theme-input:focus-visible ~ .page .switch { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* Nav */
     .nav {
@@ -117,8 +123,8 @@
         <a href="#home">Home</a><a href="#services">What We Do</a><a href="#about">About</a>
         <a href="#work">Work</a><a href="#contact">Contact</a>
       </div>
-      <label class="toggle" for="themeChk" title="Toggle dark mode">
-        <span class="moon">🌙</span><span class="sun">☀️</span>
+      <label class="switch" for="themeChk" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <span class="knob"></span>
       </label>
     </nav>
 
