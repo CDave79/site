@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clifford LC — Web Design &amp; Development Studio</title>
-  <meta name="description" content="Clifford LC designs and builds fast, modern, accessible websites and web apps — from interface design to backend and CMS." />
+  <title>Clifford LC — Systems That Run Themselves</title>
+  <meta name="description" content="Clifford LC builds quiet, autonomous systems for growing businesses — so missed calls, cold leads, forgotten follow-ups, and unclaimed reviews stop slipping through the cracks." />
   <style>
     /* Pure-CSS dark mode: a hidden checkbox toggles the theme. No JavaScript. */
     .page {
@@ -67,7 +67,7 @@
     .wrap { max-width: 720px; margin: 0 auto; }
     .wrap-wide { max-width: 1080px; margin: 0 auto; }
     .center { text-align: center; }
-    h1 { font-size: 52px; line-height: 1.07; font-weight: 700; letter-spacing: -.035em; color: var(--heading); }
+    h1 { font-size: 54px; line-height: 1.05; font-weight: 700; letter-spacing: -.035em; color: var(--heading); }
     h2 { font-size: 34px; font-weight: 700; letter-spacing: -.025em; color: var(--heading); }
     h3 { font-size: 20px; font-weight: 600; letter-spacing: -.01em; color: var(--heading); }
     .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
@@ -76,7 +76,7 @@
     @media (max-width: 640px) { section { padding: 72px 22px; } h1 { font-size: 38px; } h2 { font-size: 28px; } }
 
     /* Hero — flat, no gradient */
-    .hero { padding-top: 104px; padding-bottom: 104px; }
+    .hero { padding-top: 108px; padding-bottom: 108px; }
     .btn-row { margin-top: 34px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 14px 28px; border-radius: 999px;
@@ -87,7 +87,7 @@
     .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
     .btn-ghost:hover { background: var(--card); color: var(--heading); }
 
-    /* What we do — flat rounded tiles */
+    /* Outcome tiles — flat rounded */
     .grid { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
@@ -106,13 +106,12 @@
     .badges { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
     .badge { padding: 7px 15px; border-radius: 999px; font-size: 13px; font-weight: 500; background: var(--badge-bg); color: var(--badge-text); transition: background-color .4s, color .4s; }
 
-    /* work cards — flat rounded */
-    .cards { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
+    /* how-it-works cards — flat rounded */
+    .cards { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
     .card { background: var(--card); border-radius: 28px; padding: 32px; transition: background-color .4s ease; }
-    .card p { margin-top: 10px; color: var(--muted); }
-    .card .tags { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
-    .card .link { display: inline-block; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+    .card p { margin-top: 10px; color: var(--muted); font-size: 15px; }
+    .card .step { font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 
     /* stats */
     .stats { margin-top: 56px; display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
@@ -120,6 +119,9 @@
     .stat { background: var(--card); border-radius: 24px; padding: 28px; text-align: center; }
     .stat .n { font-size: 36px; font-weight: 700; letter-spacing: -.02em; color: var(--heading); }
     .stat .l { margin-top: 4px; font-size: 14px; color: var(--muted); }
+
+    /* quiet line under a heading */
+    .tagline { margin-top: 14px; font-size: 21px; font-weight: 600; color: var(--heading); letter-spacing: -.01em; }
 
     footer { padding: 40px 26px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 14px; color: var(--muted); transition: border-color .5s; }
     footer a { color: var(--muted); text-decoration: none; transition: color .3s; }
@@ -142,8 +144,8 @@
         Clifford<b>.</b>LC
       </span>
       <div class="nav-links">
-        <a href="#home">Home</a><a href="#services">What We Do</a><a href="#about">About</a>
-        <a href="#work">Work</a><a href="#contact">Contact</a>
+        <a href="#home">Home</a><a href="#outcomes">What We Do</a>
+        <a href="#how">How It Works</a><a href="#contact">Contact</a>
       </div>
       <label class="switch" for="themeChk" title="Toggle dark mode" aria-label="Toggle dark mode">
         <span class="knob"></span>
@@ -153,87 +155,79 @@
     <!-- Hero -->
     <section id="home" class="hero center">
       <div class="wrap">
-        <p class="eyebrow">Web Design &amp; Development Studio</p>
-        <h1 style="margin-top:16px;">Designing the Future of the Web.</h1>
-        <p class="lead">We design and build fast, modern, accessible websites and web apps — from the first pixel to production. Strategy, design, and engineering under one roof.</p>
+        <p class="eyebrow">Autonomous Systems for Growing Businesses</p>
+        <h1 style="margin-top:16px;">Your business is leaking money.</h1>
+        <p class="lead">Missed calls. Cold leads. Forgotten follow-ups. Unclaimed reviews. Invoices no one chased. We build quiet systems that handle it all — on their own — so nothing slips through the cracks again.</p>
         <div class="btn-row">
-          <a class="btn" href="#contact">Start a project</a>
-          <a class="btn btn-ghost" href="#work">See our work</a>
+          <a class="btn" href="#contact">Start a conversation</a>
+          <a class="btn btn-ghost" href="#outcomes">See what's possible</a>
         </div>
       </div>
     </section>
 
-    <!-- What we do -->
-    <section id="services">
+    <!-- Outcomes -->
+    <section id="outcomes">
       <div class="wrap-wide center">
         <p class="eyebrow">What We Do</p>
-        <h2 style="margin-top:14px;">End-to-end web, done right.</h2>
-        <p class="sub" style="max-width:600px;margin-left:auto;margin-right:auto;">We partner with founders and teams to ship polished products — combining thoughtful design with solid engineering.</p>
+        <h2 style="margin-top:14px;">What if nothing fell through the cracks?</h2>
+        <p class="sub" style="max-width:600px;margin-left:auto;margin-right:auto;">Most businesses lose more to the gaps than to the competition. We close them — with systems that keep working while you don't.</p>
         <div class="grid" style="text-align:left;">
           <div class="feature">
-            <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="M7 6.5h.01M9.5 6.5h.01"/></svg></div>
-            <h3>Web &amp; UI Design</h3><p>Clean, responsive interfaces with a clear visual system — designed to convert and built to scale across every screen.</p>
-          </div>
-          <div class="feature">
-            <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13.5 6l-3 12"/></svg></div>
-            <h3>Web Development</h3><p>Fast, accessible front-ends in React &amp; Next.js, with smooth interactions, dark mode, and rock-solid performance.</p>
-          </div>
-          <div class="feature">
-            <div class="icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V6"/><path d="M4.5 12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3"/></svg></div>
-            <h3>Backend &amp; CMS</h3><p>Reliable APIs and content systems on Node.js, PostgreSQL, and Strapi — so your team can publish without friction.</p>
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l-1 6-2 1A14 14 0 0 1 4 6z"/></svg></div>
+            <h3>Never miss a call</h3><p>Every call answered, qualified, and booked — day, night, weekend. The ones you used to miss become your next customers.</p>
           </div>
           <div class="feature">
             <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13l0-8z"/></svg></div>
-            <h3>Performance &amp; SEO</h3><p>Lightning-fast load times, semantic markup, and search-ready pages that rank and feel instant to your users.</p>
+            <h3>Never lose a lead</h3><p>New leads get a reply in seconds, not hours — and stay followed up with until they're won or warmly closed.</p>
           </div>
           <div class="feature">
-            <div class="icon"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 11.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 5 19.5L4 8z" transform="translate(1 0)"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></div>
-            <h3>E-Commerce</h3><p>Storefronts with cart, checkout, and inventory — built to sell and easy to manage day to day.</p>
+            <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <h3>Never forget a follow-up</h3><p>Quiet, relentless follow-through on every lead and customer — without a single reminder landing on your plate.</p>
           </div>
           <div class="feature">
-            <div class="icon"><svg viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.3 7.6L3.5 21l1.4-4.7A8.5 8.5 0 1 1 20.5 12z"/><path d="M9 12h.01M12 12h.01M15 12h.01"/></svg></div>
-            <h3>Support &amp; Iteration</h3><p>We don't disappear at launch. Ongoing improvements, analytics, and care to keep your product sharp.</p>
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.8 6.6 19.6l1.2-6L3.3 9.4l6.1-.8z"/></svg></div>
+            <h3>Never let a review slip</h3><p>Happy customers get asked at exactly the right moment. Your reputation grows quietly in the background.</p>
+          </div>
+          <div class="feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><path d="M8 3v4M16 3v4"/></svg></div>
+            <h3>Never chase a payment</h3><p>Unpaid invoices get found and followed up on their own. The money you're owed quietly finds its way back.</p>
+          </div>
+          <div class="feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V6"/><path d="M4.5 12c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3"/></svg></div>
+            <h3>Never start from scratch</h3><p>There's revenue hiding in the customers you already have. We know how to wake it up.</p>
           </div>
         </div>
+        <p class="sub" style="margin-top:36px;">…and that's just where the conversation starts.</p>
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about">
-      <div class="wrap">
-        <p class="eyebrow">About</p>
-        <h2 style="margin-top:14px;">A small studio that ships.</h2>
-        <p class="sub">We build end-to-end products — from data models to polished interfaces — with a focus on performance, type safety, and clean design systems. Fewer hand-offs, faster results, and code you can trust.</p>
-        <div class="badges">
-          <span class="badge">React</span><span class="badge">Node.js</span><span class="badge">Tailwind CSS</span>
-          <span class="badge">PostgreSQL</span><span class="badge">Strapi CMS</span><span class="badge">TypeScript</span>
-        </div>
-        <div class="stats">
-          <div class="stat"><div class="n">10+</div><div class="l">Years building for the web</div></div>
-          <div class="stat"><div class="n">50+</div><div class="l">Projects shipped</div></div>
-          <div class="stat"><div class="n">100%</div><div class="l">Focused on your goals</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Work -->
-    <section id="work">
+    <!-- How it works -->
+    <section id="how">
       <div class="wrap-wide">
-        <p class="eyebrow center">Selected Work</p>
-        <h2 class="center" style="margin-top:14px;">Recent projects.</h2>
+        <p class="eyebrow center">How It Works</p>
+        <h2 class="center" style="margin-top:14px;">It runs on its own. You're never on your own.</h2>
+        <p class="sub center" style="max-width:640px;margin-left:auto;margin-right:auto;">We build systems that don't need babysitting — yours or ours. They handle the everyday quietly in the background, and only raise a hand when a human truly should. You get the outcome, not another dashboard to manage.</p>
         <div class="cards">
           <div class="card">
-            <h3>E-Commerce System</h3>
-            <p>A full-stack storefront with cart, secure checkout, and real-time inventory management — fast, reliable, and easy to run.</p>
-            <div class="tags"><span class="badge">Next.js</span><span class="badge">PostgreSQL</span><span class="badge">Stripe</span></div>
-            <a class="link" href="#contact">Discuss a build like this →</a>
+            <div class="step">01 — Set up for success</div>
+            <h3 style="margin-top:10px;">We tune it to you</h3>
+            <p>We get everything dialed in and running for your business before you lift a finger — built around how you actually work.</p>
           </div>
           <div class="card">
-            <h3>AI Content Dashboard</h3>
-            <p>An analytics and generation dashboard for AI-assisted content workflows — with a clean, data-dense interface teams love.</p>
-            <div class="tags"><span class="badge">React</span><span class="badge">Node.js</span><span class="badge">Strapi</span></div>
-            <a class="link" href="#contact">Discuss a build like this →</a>
+            <div class="step">02 — Hands-on training</div>
+            <h3 style="margin-top:10px;">You stay in control</h3>
+            <p>We show you and your team exactly how it works and how to adjust it — so you're always in the driver's seat, never guessing.</p>
           </div>
+          <div class="card">
+            <div class="step">03 — Humans on call</div>
+            <h3 style="margin-top:10px;">We're a message away</h3>
+            <p>Want a change, or just have a question? Real people, ready to help — and fast updates we can push whenever you need one.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="n">24/7</div><div class="l">Always on, never off the clock</div></div>
+          <div class="stat"><div class="n">&lt;60s</div><div class="l">To respond to every new lead</div></div>
+          <div class="stat"><div class="n">0</div><div class="l">Opportunities left to slip</div></div>
         </div>
       </div>
     </section>
@@ -241,15 +235,15 @@
     <!-- Contact -->
     <section id="contact" class="center">
       <div class="wrap">
-        <p class="eyebrow">Contact</p>
-        <h2 style="margin-top:14px;">Let's build something.</h2>
-        <p class="sub">Have a project in mind, or just want to explore an idea? We'd love to hear from you.</p>
-        <div class="btn-row"><a class="btn" href="mailto:hello@cliffordlc.com">Email us</a></div>
+        <p class="eyebrow">Let's Talk</p>
+        <h2 style="margin-top:14px;">Curious what we'd automate first?</h2>
+        <p class="sub">Tell us where your day disappears. We'll show you what could be running on its own — quietly, automatically — by next month. You'll be set up for success, and we're only ever a message away.</p>
+        <div class="btn-row"><a class="btn" href="mailto:hello@cliffordlc.com">Start a conversation</a></div>
       </div>
     </section>
 
     <footer>
-      <span>© 2026 Clifford LC. All rights reserved.</span>
+      <span>© 2026 Clifford LC. Systems that run themselves.</span>
       <span><a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">LinkedIn</a> &nbsp;·&nbsp; <a href="#contact">Contact</a></span>
     </footer>
   </div>
