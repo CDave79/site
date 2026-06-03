@@ -155,11 +155,11 @@
     <!-- Hero -->
     <section id="home" class="hero center">
       <div class="wrap">
-        <p class="eyebrow">Autonomous Systems for Growing Businesses</p>
-        <h1 style="margin-top:16px;">Your business is leaking money.</h1>
-        <p class="lead">Missed calls. Cold leads. Forgotten follow-ups. Unclaimed reviews. Invoices no one chased. We build quiet systems that handle it all — on their own — so nothing slips through the cracks again.</p>
+        <p class="eyebrow" data-cms="hero_eyebrow">Autonomous Systems for Growing Businesses</p>
+        <h1 style="margin-top:16px;" data-cms="hero_headline">Your business is leaking money.</h1>
+        <p class="lead" data-cms="hero_subhead">Missed calls. Cold leads. Forgotten follow-ups. Unclaimed reviews. Invoices no one chased. We build quiet systems that handle it all — on their own — so nothing slips through the cracks again.</p>
         <div class="btn-row">
-          <a class="btn" href="#contact">Start a conversation</a>
+          <a class="btn" href="#contact" data-cms="cta_primary">Start a conversation</a>
           <a class="btn btn-ghost" href="#outcomes">See what's possible</a>
         </div>
       </div>
@@ -232,39 +232,12 @@
       </div>
     </section>
 
-    <!-- Proof -->
-    <section id="proof">
-      <div class="wrap-wide">
-        <p class="eyebrow center">The Proof</p>
-        <h2 class="center" style="margin-top:14px;">If it doesn't pay for itself, we haven't done our job.</h2>
-        <p class="sub center" style="max-width:640px;margin-left:auto;margin-right:auto;">We don't hand you software and wish you luck. We deliver outcomes you can measure — and we stand behind them.</p>
-        <div class="cards">
-          <div class="card">
-            <p style="font-size:17px;color:var(--heading);line-height:1.55;">&ldquo;[Real client quote — the result they got, in their own words.]&rdquo;</p>
-            <div class="step" style="margin-top:18px;">— [Client name], [Business]</div>
-          </div>
-          <div class="card">
-            <p style="font-size:17px;color:var(--heading);line-height:1.55;">&ldquo;[A second quote — ideally one with a number: calls captured, revenue recovered, hours saved.]&rdquo;</p>
-            <div class="step" style="margin-top:18px;">— [Client name], [Business]</div>
-          </div>
-          <div class="card">
-            <p style="font-size:17px;color:var(--heading);line-height:1.55;">&ldquo;[A third quote — speaking to how easy it was and that they're never left stranded.]&rdquo;</p>
-            <div class="step" style="margin-top:18px;">— [Client name], [Business]</div>
-          </div>
-        </div>
-        <div class="badges" style="justify-content:center;margin-top:32px;">
-          <span class="badge">Set up for success</span><span class="badge">Trained, not stranded</span>
-          <span class="badge">Real humans on call</span><span class="badge">Results you can measure</span>
-        </div>
-      </div>
-    </section>
-
     <!-- Contact -->
     <section id="contact" class="center">
       <div class="wrap">
         <p class="eyebrow">Let's Talk</p>
-        <h2 style="margin-top:14px;">Curious what we'd automate first?</h2>
-        <p class="sub">Tell us where your day disappears. We'll show you what could be running on its own — quietly, automatically — by next month. You'll be set up for success, and we're only ever a message away.</p>
+        <h2 style="margin-top:14px;" data-cms="contact_heading">Curious what we'd automate first?</h2>
+        <p class="sub" data-cms="contact_sub">Tell us where your day disappears. We'll show you what could be running on its own — quietly, automatically — by next month. You'll be set up for success, and we're only ever a message away.</p>
         <div class="btn-row"><a class="btn" href="mailto:hello@cliffordlc.com">Start a conversation</a></div>
       </div>
     </section>
@@ -274,5 +247,19 @@
       <span><a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">LinkedIn</a> &nbsp;·&nbsp; <a href="#contact">Contact</a></span>
     </footer>
   </div>
+
+  <!-- Lightweight CMS hydration: pulls editable text from content/home.json when present -->
+  <script>
+    fetch('content/home.json', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d) return;
+        document.querySelectorAll('[data-cms]').forEach(function (el) {
+          var k = el.getAttribute('data-cms');
+          if (d[k] != null && d[k] !== '') el.textContent = d[k];
+        });
+      })
+      .catch(function () {});
+  </script>
 </body>
 </html>

@@ -1,0 +1,31 @@
+# Sveltia CMS configuration (Decap-compatible).
+# Content is committed straight to this GitHub repo — the repo is the "database".
+backend:
+  name: github
+  repo: CDave79/site
+  branch: main
+  # One-time auth step: deploy the free Sveltia auth worker (Cloudflare) and a
+  # GitHub OAuth app, then replace the URL below with your worker URL.
+  # Guide: https://github.com/sveltia/sveltia-cms-auth
+  base_url: https://REPLACE-WITH-YOUR-AUTH-WORKER.workers.dev
+
+# Where uploaded images are stored in the repo
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: site
+    label: Site Content
+    description: Edit the words on the homepage.
+    files:
+      - name: home
+        label: Homepage
+        file: content/home.json
+        format: json
+        fields:
+          - { name: hero_eyebrow, label: "Hero — small heading above the headline", widget: string }
+          - { name: hero_headline, label: "Hero — main headline", widget: string }
+          - { name: hero_subhead, label: "Hero — supporting paragraph", widget: text }
+          - { name: cta_primary, label: "Hero — button label", widget: string }
+          - { name: contact_heading, label: "Contact — heading", widget: string }
+          - { name: contact_sub, label: "Contact — paragraph", widget: text }
