@@ -11,7 +11,7 @@
       --bg: #f8f9fb; --text: #44506a; --heading: #1f2a3d;
       --muted: #717c90; --border: #e4e8ef; --card: #eceff4;
       --badge-bg: #e9f0fb; --badge-text: #3a66bf;
-      --primary: #3b82f6; --primary-hover: #2f6fe0; --accent: #3f74d6;
+      --primary: #1f2a3d; --primary-hover: #2f3b52; --accent: #3f74d6; --btn-text: #ffffff;
       --nav-bg: rgba(248,249,251,.82); --switch-track: #cdd4df; --switch-track-on: #1f2a3d;
       --logo-square: #dbeafe; --logo-c: #2563eb;
     }
@@ -19,7 +19,7 @@
       --bg: #141a26; --text: #c2cbd9; --heading: #f1f4f9;
       --muted: #8893a6; --border: #2a3344; --card: #1d2433;
       --badge-bg: rgba(122,167,240,.16); --badge-text: #9bbcf2;
-      --primary: #3b82f6; --primary-hover: #5a97f7; --accent: #84acec;
+      --primary: #e7ecf3; --primary-hover: #ffffff; --accent: #84acec; --btn-text: #141a26;
       --nav-bg: rgba(20,26,38,.82); --switch-track: #3a4557; --switch-track-on: #e7ecf3;
       --logo-square: rgba(122,167,240,.2); --logo-c: #84acec;
     }
@@ -81,7 +81,7 @@
     .btn-row { margin-top: 34px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 14px 28px; border-radius: 999px;
-      background: var(--primary); color: #fff; font-weight: 600; text-decoration: none;
+      background: var(--primary); color: var(--btn-text); font-weight: 600; text-decoration: none;
       transition: background-color .3s;
     }
     .btn:hover { background: var(--primary-hover); }
