@@ -3,11 +3,11 @@
 > Seed document for a Claude Project. Paste this in as knowledge so new chats
 > start with full context. Update it as decisions change.
 
-## 1. What Clifford LLC is
+## 1. What Clifford LC is
 
 A web + automation business run by Clifford LC. Two product lines:
 
-- **Company presence** — the marketing site at clifford.llc (currently the
+- **Company presence** — the marketing site at clifford.lc (currently the
   static portfolio in the `site` GitHub repo). Expected to grow over time.
 - **Client automations** — custom automation systems built for clients. These
   do **not** live on the company's own infrastructure; each client gets a
@@ -17,7 +17,7 @@ A web + automation business run by Clifford LC. Two product lines:
 
 | Layer | What it is | Where it lives now | Later |
 |---|---|---|---|
-| **1. Company site** (clifford.llc) | Marketing, grows over time | Static, free (GitHub Pages) | Small app host only when it needs a real backend |
+| **1. Company site** (clifford.lc) | Marketing, grows over time | Static, free (GitHub Pages) | Small app host only when it needs a real backend |
 | **2. Your backend / hub** | Your own tools, demos, internal CMS, where automations get *built* | One small VPS or app platform (Render / Railway / Hetzner / DO) | Same, scale up as needed |
 | **3. Client automations** | Each client's running systems | One isolated environment **per client** (small instance) | Google Cloud (GCP) — its per-project model = natural per-client isolation + separate billing |
 
