@@ -1,4 +1,4 @@
-# Clifford LLC — Project Overview & Infrastructure Plan
+# Clifford LC — Project Overview & Infrastructure Plan
 
 > Seed document for a Claude Project. Paste this in as knowledge so new chats
 > start with full context. Update it as decisions change.
