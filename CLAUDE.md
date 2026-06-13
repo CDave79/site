@@ -101,10 +101,12 @@ When adding or updating UI in the source project, **always provide the matching 
 
 ## 8. Git Workflow
 
-- **`main`** — production. Whatever is on `main` is what GitHub Pages publishes.
-- **`claude/<slug>`** — feature/working branches for AI-assisted changes (e.g. `claude/claude-md-docs-dRfx5`). Branch from `main`, do the work, then open a PR back into `main`.
+- **`main`** — production. Whatever is on `main` is what GitHub Pages publishes (and what the upstream server pulls to serve the site).
+- **`claude/<slug>`** — feature/working branches for AI-assisted changes (e.g. `claude/claude-md-docs-0v4pe`). Branch from `main`, do the work, then open a PR back into `main`.
 
 Never push directly to `main` without review; production deploys from it.
+
+> **Preserve this file across publishes.** The publish/export pipeline overwrites `main` with fresh build output. `CLAUDE.md` is **not** part of that build output, so the pipeline must be configured to keep this file (and `.nojekyll`) rather than wiping it on each clean publish. If `CLAUDE.md` disappears after a deploy, the pipeline dropped it — re-add it and exclude it from the clean step.
 
 ## 9. AI Assistant Guidelines
 

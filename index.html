@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clifford LC — Systems That Run Themselves</title>
-  <meta name="description" content="Clifford LC builds quiet, autonomous systems for growing businesses — so missed calls, cold leads, forgotten follow-ups, and unclaimed reviews stop slipping through the cracks." />
+  <title>Clifford— Systems That Run Themselves</title>
+  <meta name="description" content="Clifford builds quiet, autonomous systems for growing businesses — so missed calls, cold leads, forgotten follow-ups, and unclaimed reviews stop slipping through the cracks." />
+  <title>Clifford - Systems That Run Themselves</title>
+  <meta name="description" content="Clifford builds quiet, autonomous systems for growing businesses — so missed calls, cold leads, forgotten follow-ups, and unclaimed reviews stop slipping through the cracks." />
   <style>
     /* Pure-CSS dark mode: a hidden checkbox toggles the theme. No JavaScript. */
     .page {
       --bg: #f8f9fb; --text: #44506a; --heading: #1f2a3d;
       --muted: #717c90; --border: #e4e8ef; --card: #eceff4;
       --badge-bg: #e9f0fb; --badge-text: #3a66bf;
-      --primary: #3b82f6; --primary-hover: #2f6fe0; --accent: #3f74d6;
-      --nav-bg: rgba(248,249,251,.82); --switch-track: #cdd4df; --switch-track-on: #3b82f6;
+      --primary: #1f2a3d; --primary-hover: #2f3b52; --accent: #3f74d6; --btn-text: #ffffff;
+      --nav-bg: rgba(248,249,251,.82); --switch-track: #cdd4df; --switch-track-on: #1f2a3d;
       --logo-square: #dbeafe; --logo-c: #2563eb;
     }
     .theme-input:checked ~ .page {
       --bg: #141a26; --text: #c2cbd9; --heading: #f1f4f9;
       --muted: #8893a6; --border: #2a3344; --card: #1d2433;
       --badge-bg: rgba(122,167,240,.16); --badge-text: #9bbcf2;
-      --primary: #3b82f6; --primary-hover: #5a97f7; --accent: #84acec;
-      --nav-bg: rgba(20,26,38,.82); --switch-track: #3a4557; --switch-track-on: #3b82f6;
+      --primary: #e7ecf3; --primary-hover: #ffffff; --accent: #84acec; --btn-text: #141a26;
+      --nav-bg: rgba(20,26,38,.82); --switch-track: #3a4557; --switch-track-on: #e7ecf3;
       --logo-square: rgba(122,167,240,.2); --logo-c: #84acec;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,6 +43,7 @@
     .switch .knob {
       position: absolute; top: 3px; left: 3px; width: 22px; height: 22px;
       border-radius: 50%; background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.06);
       transition: transform .35s cubic-bezier(.4,.15,.2,1);
     }
     .theme-input:checked ~ .page .switch { background: var(--switch-track-on); }
@@ -80,7 +83,7 @@
     .btn-row { margin-top: 34px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 14px 28px; border-radius: 999px;
-      background: var(--primary); color: #fff; font-weight: 600; text-decoration: none;
+      background: var(--primary); color: var(--btn-text); font-weight: 600; text-decoration: none;
       transition: background-color .3s;
     }
     .btn:hover { background: var(--primary-hover); }
@@ -156,7 +159,7 @@
     <section id="home" class="hero center">
       <div class="wrap">
         <p class="eyebrow" data-cms="hero_eyebrow">Autonomous Systems for Growing Businesses</p>
-        <h1 style="margin-top:16px;" data-cms="hero_headline">Your business is leaking money.</h1>
+        <h1 style="margin-top:16px;" data-cms="hero_headline">Your business is losing money.</h1>
         <p class="lead" data-cms="hero_subhead">Missed calls. Cold leads. Forgotten follow-ups. Unclaimed reviews. Invoices no one chased. We build quiet systems that handle it all — on their own — so nothing slips through the cracks again.</p>
         <div class="btn-row">
           <a class="btn" href="#contact" data-cms="cta_primary">Start a conversation</a>
@@ -243,7 +246,7 @@
     </section>
 
     <footer>
-      <span>© 2026 Clifford LC. Systems that run themselves.</span>
+      <span>© 2026 Clifford LC </span>
       <span><a href="#">GitHub</a> &nbsp;·&nbsp; <a href="#">LinkedIn</a> &nbsp;·&nbsp; <a href="#contact">Contact</a></span>
     </footer>
   </div>
