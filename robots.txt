@@ -1,0 +1,4 @@
+# clifford.llc
+User-agent: *
+Allow: /
+Disallow: /admin/
