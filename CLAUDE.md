@@ -4,122 +4,120 @@ This file guides Claude Code (and other AI assistants) when working in this repo
 
 ## 1. Repository Overview
 
-This repository is a **GitHub Pages deployment target**, not a source code repository.
+This repository is the **GitHub Pages deployment target** for the **Clifford LC** marketing
+site, served at **`clifford.lc`** (see `CNAME`).
 
-It contains **only the compiled static output** of a Next.js portfolio site for **Clifford LC**. The site is authored in a separate Next.js project and exported as static HTML/CSS/JS; the build artifacts are then published here so GitHub Pages can serve them.
+Unlike a typical front-end project, there is **no build step and no framework here**. The site
+is a **single hand-authored static `index.html`** with all CSS inline. What you see in the repo
+is exactly what GitHub Pages serves — edit the files directly, commit, and the change ships.
 
-There is **no application source code, `package.json`, component, or build tooling in this repo** — everything here is generated. Treat the contents as build output: read it to understand the shipped site, but do not hand-edit it (see §9).
+> Note: there is no `package.json`, no `_next/`, no bundler, and no compiled output. Earlier
+> versions of this file described a Next.js export; that is no longer accurate.
 
 ## 2. File Tree
 
 ```
 .
-├── .nojekyll                 # Disables GitHub Pages' Jekyll processing so that
-│                             #   _next/ (a leading-underscore dir) is served as-is.
-├── index.html                # Home page — the single-page portfolio document.
-├── 404.html                  # Custom not-found page served by GitHub Pages.
-├── index.txt                 # Next.js RSC payload / prefetch data for the route.
-└── _next/                    # Next.js build output (hashed, immutable assets).
-    └── static/
-        ├── css/              # Compiled Tailwind stylesheet(s), content-hashed.
-        ├── chunks/           # JS bundles: framework, main, webpack, page chunks.
-        └── 2oc3UFiPkcf3Ve6lw6mD-/   # Per-build directory keyed by the build ID.
+├── index.html                # The entire public site (one page, inline CSS, tiny JS).
+├── content/
+│   └── home.json             # Editable homepage copy, loaded by index.html at runtime.
+├── admin/
+│   ├── index.html            # Sveltia CMS editor shell (loads the CMS from a CDN).
+│   └── config.yml            # CMS config: backend + which fields map to content/home.json.
+├── CNAME                     # Custom domain: clifford.lc
+├── robots.txt                # Allows crawling; disallows /admin/.
+├── clifford-llc-overview.md  # Business/infrastructure strategy doc (not part of the site).
+├── preview-mockup.html       # Local design mockup — not linked from the live site.
+├── .gitignore                # Ignores preview-dark.html (local-only viewing aid).
+└── CLAUDE.md                 # This file.
 ```
 
-**Build ID:** `2oc3UFiPkcf3Ve6lw6mD-`
+## 3. How the Site Works
 
-The build ID changes on every production build. Asset paths under `_next/static/<buildId>/` and the hashed filenames under `css/` and `chunks/` are regenerated each time, so never reference them by hand or hardcode them elsewhere — they are cache-busted by design.
+### Static page + runtime content hydration
+- `index.html` ships with real fallback copy baked in. On load, a small inline script
+  `fetch`es `content/home.json` and overwrites any element marked `data-cms="<key>"` with the
+  matching value. If the JSON is missing or fails to load, the baked-in fallback text shows.
+- **Keep the `data-cms` fallback text in `index.html` in sync with `content/home.json`.** The
+  JSON wins at runtime, so if they disagree, the JSON value is what visitors actually see.
+- The editable keys are: `hero_eyebrow`, `hero_headline`, `hero_subhead`, `cta_primary`,
+  `contact_heading`, `contact_sub`.
 
-## 3. Inferred Source Architecture
+### Content editing via Sveltia CMS (`/admin/`)
+- `/admin/` loads **Sveltia CMS** (a Decap-compatible, git-based editor) from a CDN. It has
+  **no server or database** — saving an edit commits straight to this repo's `main` branch.
+- `admin/config.yml` defines the GitHub backend and the form fields that map onto
+  `content/home.json`.
+- **One-time setup still pending:** `base_url` in `admin/config.yml` is a placeholder
+  (`https://REPLACE-WITH-YOUR-AUTH-WORKER.workers.dev`). The CMS login won't work until a
+  Sveltia auth worker (Cloudflare) + a GitHub OAuth app are deployed and that URL is filled in.
+  Guide: https://github.com/sveltia/sveltia-cms-auth
 
-The compiled output indicates the upstream source project is built with:
+## 4. Page Sections (in document order)
 
-- **Next.js (App Router)** — the `_next/static/` layout, build-ID directory, and `index.txt` RSC payload are App Router signatures.
-- **TypeScript** — the source is authored in TS (`.tsx`/`.ts`).
-- **Tailwind CSS v3.4.19** — utility-first styling compiled into the hashed CSS under `_next/static/css/`.
-- **Static export** — the project uses `output: 'export'` in `next.config`, producing fully static HTML with no server runtime. This is what makes GitHub Pages hosting possible (no Node server, no ISR, no API routes).
+`index.html` is a single page composed of:
 
-> These are *inferences from the build artifacts*. The authoritative source lives in the separate Next.js project, not here.
+1. **`#home`** — Hero. Eyebrow, headline (*"Your business is losing money."*), supporting copy,
+   and two CTAs ("Start a conversation" → `#contact`, "See what's possible" → `#outcomes`).
+2. **`#outcomes`** ("What We Do") — Six "Never…" outcome tiles (missed calls, lost leads,
+   follow-ups, reviews, payments, reactivation).
+3. **`#how`** ("How It Works") — Three step cards plus a 24/7 · <60s · 0 stats row.
+4. **`#contact`** — Heading, supporting copy, and a `mailto:hello@cliffordlc.com` CTA.
+5. **Footer** — Copyright and social links.
 
-## 4. Site Sections (in document order)
+The sticky nav links anchor to `#home`, `#outcomes`, `#how`, `#contact`.
 
-The single-page site is composed of the following sections, in order:
+## 5. Design System
 
-1. **`#home`** — Hero section. Headline: **"Designing the Future of the Web."** with a primary call-to-action.
-2. **`#about`** — About blurb plus skill badges: **React**, **Node.js**, **Tailwind CSS**, **PostgreSQL**, **Strapi CMS**, **TypeScript**.
-3. **`#video`** — Product demo video player.
-4. **`#projects`** — Project cards:
-   - **E-Commerce System**
-   - **AI Content Dashboard**
-5. **`#contact`** — Contact section with an email call-to-action.
-6. **Footer** — Closing footer with copyright and social links.
+The site is styled with **plain CSS using CSS custom properties** — no Tailwind, no utility
+classes. Theme values live as `--variables` on `.page`.
 
-The fixed navigation links anchor to these section IDs (`#home`, `#about`, `#video`, `#projects`, `#contact`).
+- **Dark mode is pure CSS, no JavaScript.** A visually-hidden checkbox (`#themeChk`) holds the
+  state; `.theme-input:checked ~ .page { … }` swaps the variable values. The label `.switch` is
+  an Apple-style toggle in the nav.
+- **Color approach:** a light/blue/slate-leaning palette via variables (`--bg`, `--text`,
+  `--heading`, `--muted`, `--border`, `--card`, `--accent` ≈ `#3f74d6`, plus badge/nav/switch
+  tokens). Every theme value has a dark-mode counterpart.
+- **Smooth theme transitions:** color-changing elements use `transition: … .5s ease` (or `.3s`–
+  `.4s`) so light/dark fades rather than snaps. **Preserve this when editing.**
+- **Layout primitives:** `.wrap` (max 720px) / `.wrap-wide` (max 1080px) centered containers,
+  `section { padding: 96px 26px }`, flat rounded cards (`.feature`, `.card`, `.stat`) with
+  `border-radius` 24–28px, pill `.btn` / `.badge`.
+- **Type scale:** `h1` 54px, `h2` 34px, `h3` 20px, all with tight negative letter-spacing;
+  `.eyebrow` is the uppercase accent kicker. Responsive breakpoints at 760/700/640/560px.
 
-## 5. Navigation & Responsive Behavior
+When editing UI: **work in the same CSS-variable system**, give every new themed value a
+dark-mode counterpart in the `.theme-input:checked ~ .page` block, and keep the transition.
 
-- **Fixed nav bar** pinned to the top of the viewport across all scroll positions.
-- **Backdrop blur** — the nav uses a translucent background with `backdrop-blur` so content scrolls beneath it.
-- **Dark mode toggle** — implemented via **React state** (a controlled toggle that adds/removes the `dark` class on the document root), **not** the CSS `prefers-color-scheme` media query. This gives the user explicit, manual control over the theme.
-- **Mobile behavior** — the inline nav links are **hidden below the `md:` breakpoint** (`hidden md:flex`); on small screens the link list collapses.
+## 6. Open Items / Placeholders
 
-## 6. Design System
+- **CMS auth worker** — fill `base_url` in `admin/config.yml` (see §3) so `/admin/` login works.
+- **Footer social links** — GitHub and LinkedIn are `href="#"` placeholders in `index.html`.
+  Fill in the real URLs (or remove the links if there are no socials yet).
+- The contact email is already real (`hello@cliffordlc.com`).
 
-### Color palette — blue / slate
+## 7. Editing Guidelines
 
-- **Accent / brand:** blue scale (e.g. `blue-500`, `blue-600` for buttons and links, `blue-400` for accents in dark mode).
-- **Neutrals:** slate scale (`slate-50`/`slate-100` light backgrounds, `slate-600`/`slate-700` body text, `slate-800`/`slate-900` dark-mode surfaces).
-
-### Typography scale
-
-- **Hero / H1:** large display sizes (`text-4xl`–`text-6xl`), bold, tight tracking.
-- **Section headings (H2):** `text-3xl`–`text-4xl`, semibold/bold.
-- **Card titles (H3):** `text-xl`–`text-2xl`, semibold.
-- **Body:** `text-base`/`text-lg` with relaxed leading; muted slate text for secondary copy.
-
-### Spacing conventions
-
-- **Section rhythm:** generous vertical padding (`py-16`–`py-24`) to separate sections.
-- **Container:** centered with horizontal padding (`mx-auto px-4`/`px-6`) and a max width.
-- **Internal gaps:** flex/grid `gap-4`–`gap-8` for badge rows and card grids.
-
-### Component patterns
-
-- **Skill badge:** pill-shaped chip — rounded-full, subtle slate/blue background, small padding (`px-3 py-1`), `text-sm`, used for the `#about` skill list.
-- **Project card:** rounded container (`rounded-xl`/`rounded-2xl`) with border/shadow, padded body, a title (H3), description, and a tag/preview area. Hover elevates (shadow/translate transition).
-- **Primary button:** solid blue background (`bg-blue-600 hover:bg-blue-700`), white text, rounded, padded (`px-6 py-3`), used for hero CTA and contact CTA.
-- **Video container:** responsive aspect-ratio wrapper (e.g. `aspect-video`) with rounded corners and overflow-hidden, holding the demo player.
-- **Contact section:** centered heading, supporting copy, and a primary email CTA button.
-
-## 7. Dark Mode Conventions
-
-- Dark mode is **class-based** (Tailwind `darkMode: 'class'`): styles are written as `bg-white dark:bg-slate-900`, `text-slate-700 dark:text-slate-200`, etc. The React toggle swaps the `dark` class on `<html>`.
-- Components pair every themed utility with its `dark:` counterpart (background, text, border).
-- Theme changes are animated with **`transition-colors duration-500`** so the swap between light and dark fades smoothly rather than snapping.
-
-When adding or updating UI in the source project, **always provide the matching `dark:` variant** and keep the `transition-colors duration-500` convention for color-changing elements.
+- **Edit the files directly.** This repo *is* the published site — there's no separate source
+  project and no build to run. A change to `index.html` (or `content/home.json`) is live once it
+  reaches `main`.
+- **Keep `index.html` fallback text and `content/home.json` in agreement** (see §3).
+- **Don't touch third-party URLs** like the Sveltia CMS CDN script unless intentionally
+  upgrading it.
+- `preview-mockup.html` and the git-ignored `preview-dark.html` are local design aids — not part
+  of the live site; don't link to them from `index.html`.
 
 ## 8. Git Workflow
 
-- **`main`** — production. Whatever is on `main` is what GitHub Pages publishes (and what the upstream server pulls to serve the site).
-- **`claude/<slug>`** — feature/working branches for AI-assisted changes (e.g. `claude/claude-md-docs-0v4pe`). Branch from `main`, do the work, then open a PR back into `main`.
+- **`main`** — production. GitHub Pages publishes whatever is on `main` to `clifford.lc`. Sveltia
+  CMS also commits content edits directly to `main`.
+- **`claude/<slug>`** — feature/working branches for AI-assisted changes. Branch from `main`, do
+  the work, open a PR back into `main`.
 
 Never push directly to `main` without review; production deploys from it.
 
-> **Preserve this file across publishes.** The publish/export pipeline overwrites `main` with fresh build output. `CLAUDE.md` is **not** part of that build output, so the pipeline must be configured to keep this file (and `.nojekyll`) rather than wiping it on each clean publish. If `CLAUDE.md` disappears after a deploy, the pipeline dropped it — re-add it and exclude it from the clean step.
-
-## 9. AI Assistant Guidelines
-
-When working in this repository:
-
-- **Do not edit compiled files.** `index.html`, `404.html`, `index.txt`, and everything under `_next/` are generated build artifacts. Hand-edits will be overwritten on the next build and can break content hashes. Make real changes in the upstream Next.js source project and re-export.
-- **Follow the established Tailwind patterns** when touching the source: blue/slate palette, the typography and spacing scales above, class-based dark mode with paired `dark:` variants, and `transition-colors duration-500`.
-- **Update the remaining placeholders** in the source project:
-  - Replace the placeholder contact email **`alex.doe@example.com`** with Clifford LC's real address.
-  - Fill in the **`href="#"`** placeholder links for **GitHub** and **LinkedIn** in the footer/social section.
-  - Populate the **empty Preview `<span>`s** on the project cards with real preview text/links.
-  - Replace the **decorative/placeholder video** in `#video` with the actual product demo.
-
 ---
 
-*This repo holds generated output only. The source of truth is the upstream Next.js project — edit there, build, and publish the result here.*
+*This repo is the live site itself — edit here, commit, and it ships. The `clifford-llc-overview.md`
+strategy doc and the upstream "Agents" automation work live elsewhere and are out of scope for this
+repository.*
