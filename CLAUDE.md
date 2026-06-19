@@ -27,7 +27,7 @@ is exactly what GitHub Pages serves — edit the files directly, commit, and the
 ├── CNAME                     # Custom domain: clifford.lc
 ├── robots.txt                # Allows crawling; disallows /admin/.
 ├── clifford-llc-overview.md  # Business/infrastructure strategy doc (not part of the site).
-├── preview-mockup.html       # Local design mockup — not linked from the live site.
+├── mockup.html               # Local design mockup mirroring the live site — not linked from it.
 ├── .gitignore                # Ignores preview-dark.html (local-only viewing aid).
 └── CLAUDE.md                 # This file.
 ```
@@ -104,7 +104,7 @@ dark-mode counterpart in the `.theme-input:checked ~ .page` block, and keep the 
 - **Keep `index.html` fallback text and `content/home.json` in agreement** (see §3).
 - **Don't touch third-party URLs** like the Sveltia CMS CDN script unless intentionally
   upgrading it.
-- `preview-mockup.html` and the git-ignored `preview-dark.html` are local design aids — not part
+- `mockup.html` and the git-ignored `preview-dark.html` are local design aids — not part
   of the live site; don't link to them from `index.html`.
 
 ## 8. Git Workflow
